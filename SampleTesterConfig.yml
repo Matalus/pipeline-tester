@@ -1,0 +1,65 @@
+#Release Servers to Test
+# These servers will need to be able to reach Release Servers
+Release:
+  Servers:
+    - build-serv-01.corp.domain.com
+    - build-serv-02.corp.domain.com
+    - build-serv-03.corp.domain.com
+  # The Ports that Release Servers need to communicate on
+  Ports:
+    - 5985  # WinRM (PowerShell)
+    - 445   # SMB (RoboCopy)
+
+# List of Environments that need to be reachable from Build Servers
+Environments:
+  - Name: Dev
+    # The Servers the application will be hosted on
+    Servers:
+      - task-serv-01.corp.domain.com
+      - task-serv-02.corp.domain.com
+    # Servers that application server will need firewall flows to access
+    Ancillary:
+      - Name: kafka01d.corp.domain.com
+        Ports: 
+          - 9093
+      - Name: kafka02d.corp.domain.com
+        Ports: 
+          - 9093
+      - Name: kafka03d.corp.domain.com
+        Ports: 
+          - 9093
+      - Name: elasticsearch-serv-01d.corp.domain.com
+        Ports:
+          - 9200
+
+  - Name: Prod
+    Servers:
+      - web-service-clstr-d-01.corp.domain.com
+      - web-service-clstr-d-02.corp.domain.com
+      - web-service-clstr-d-03.corp.domain.com
+      - web-service-clstr-d-04.corp.domain.com
+      - web-service-clstr-d-05.corp.domain.com
+      - web-service-clstr-d-06.corp.domain.com
+    # Servers that application server will need firewall flows to access
+    Ancillary:
+      - Name: kafka-serv-01.corp.domain.com
+        Ports:
+          - 9093
+      - Name: kafka-serv-01.corp.domain.com
+        Ports:
+          - 9093
+      - Name: kafka-serv-02.corp.domain.com
+        Ports:
+          - 9093
+      - Name: kafka-serv-03.corp.domain.com
+        Ports:
+          - 9093
+      - Name: kafka-serv-04.corp.domain.com
+        Ports:
+          - 9093
+      - Name: kafka-serv-05.corp.domain.com
+        Ports:
+          - 9093
+      - Name: elasticsearch-serv-01.corp.domain.com
+        Ports:
+          - 9200
